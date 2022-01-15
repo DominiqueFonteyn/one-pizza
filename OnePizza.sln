@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePizza", "OnePizza\OnePizza.csproj", "{C3B1FF37-0DB8-4EE8-87AF-C8F6E523AB4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnePizza.Tests", "OnePizza.Tests\OnePizza.Tests.csproj", "{8B67B32B-920A-475A-B194-FC8DE0AF19D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C3B1FF37-0DB8-4EE8-87AF-C8F6E523AB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B1FF37-0DB8-4EE8-87AF-C8F6E523AB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3B1FF37-0DB8-4EE8-87AF-C8F6E523AB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B67B32B-920A-475A-B194-FC8DE0AF19D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B67B32B-920A-475A-B194-FC8DE0AF19D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B67B32B-920A-475A-B194-FC8DE0AF19D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B67B32B-920A-475A-B194-FC8DE0AF19D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
