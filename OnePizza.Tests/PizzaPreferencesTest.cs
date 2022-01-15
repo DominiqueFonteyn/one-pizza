@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Linq;
+using Xunit;
 
 namespace OnePizza.Tests
 {
@@ -20,6 +21,14 @@ namespace OnePizza.Tests
         {
             var preferences = new PizzaPreferences(_input);
             Assert.Equal(3, preferences.NumberOfPotentialClients);
+        }
+
+        [Fact]
+        public void Ctor_Parses_Likes()
+        {
+            var preferences = new PizzaPreferences(_input);
+            var likes = new[] { "cheese", "peppers", "basil", "mushrooms", "tomatoes" };
+            Assert.True(likes.OrderBy(x => x).SequenceEqual(preferences.Likes.OrderBy(x => x)));
         }
     }
 }
