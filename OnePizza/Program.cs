@@ -26,7 +26,7 @@ namespace OnePizza
 
             var ingredients = clients.SelectMany(x => x.Likes.Union(x.Dislikes)).Distinct().OrderBy(x => x).ToArray();
 
-            var pizzas = PizzaGenerator.CreatePizzas(ingredients);
+            var pizzas = PizzaGenerator.GeneratePizzas(ingredients);
             
             // TODO score each pizza
             
