@@ -11,7 +11,7 @@ namespace OnePizza.Tests
         {
             var ingredients = new[] { "a", "b", "c" };
 
-            var pizzas = PizzaGenerator.GeneratePizzas(ingredients).ToArray();
+            var pizzas = PizzaGenerator.GeneratePizzas(ingredients);
 
             Assert.Contains(new Pizza("a"), pizzas);
             Assert.Contains(new Pizza("b"), pizzas);

@@ -27,10 +27,21 @@ namespace OnePizza
             var ingredients = clients.SelectMany(x => x.Likes.Union(x.Dislikes)).Distinct().OrderBy(x => x).ToArray();
 
             var pizzas = PizzaGenerator.GeneratePizzas(ingredients);
-            
+
+            PrintPizzas(pizzas);
+
             // TODO score each pizza
             
             Console.WriteLine("Bye!");
+        }
+
+        private static void PrintPizzas(Pizza[] pizzas)
+        {
+            Console.WriteLine($"Found {pizzas.Length} possible pizzas!");
+            foreach (var pizza in pizzas)
+            {
+                Console.WriteLine($" - {string.Join(", ", pizza.Ingredients)}");
+            }
         }
     }
 }

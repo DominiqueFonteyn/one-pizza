@@ -5,7 +5,7 @@ namespace OnePizza
 {
     public class PizzaGenerator
     {
-        public static IEnumerable<Pizza> GeneratePizzas(params string[] ingredients)
+        public static Pizza[] GeneratePizzas(params string[] ingredients)
         {
             var pizzas = new List<Pizza>();
             pizzas.AddRange(ingredients.Select(x => new Pizza(x)));
@@ -17,7 +17,7 @@ namespace OnePizza
                 pizzas.AddRange(newPizzas);
             }
 
-            return pizzas.Distinct();
+            return pizzas.Distinct().ToArray();
         }
 
         private static IEnumerable<Pizza> FindNewPizzas(string[] ingredients, List<Pizza> previousPizzas)
