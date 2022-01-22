@@ -44,5 +44,15 @@ namespace OnePizza
         {
             return !Equals(left, right);
         }
+
+        public bool HasIngredient(string ingredient)
+        {
+            return Ingredients.Contains(ingredient);
+        }
+
+        public Pizza AddIngredient(string ingredient)
+        {
+            return new Pizza(Ingredients.Union(new[] { ingredient }).ToArray());
+        }
     }
 }

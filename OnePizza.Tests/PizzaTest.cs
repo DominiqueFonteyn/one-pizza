@@ -27,5 +27,25 @@ namespace OnePizza.Tests
                 new Pizza("a", "b", "c"),
                 new Pizza("b", "a", "c"));
         }
+
+        [Fact]
+        public void HasIngredient()
+        {
+            var pizza = new Pizza("a", "b");
+            
+            Assert.True(pizza.HasIngredient("a"));
+            Assert.False(pizza.HasIngredient("d"));
+        }
+
+        [Fact]
+        public void AddIngredient()
+        {
+            var pizza = new Pizza("a", "b");
+
+            var newPizza = pizza.AddIngredient("c");
+            
+            Assert.NotEqual(pizza, newPizza);
+            Assert.Equal(new Pizza("a", "b", "c"), newPizza);
+        }
     }
 }

@@ -5,41 +5,29 @@ namespace OnePizza
 {
     public class PizzaGenerator
     {
-        public static IEnumerable<string[]> GeneratePizzas(params string[] ingredients)
+        public static IEnumerable<Pizza> GeneratePizzas(params string[] ingredients)
         {
-            var itemset = new HashSet<string[]>();
+            var pizzas = new List<Pizza>();
+            pizzas.AddRange(ingredients.Select(x => new Pizza(x)));
 
-            // k = 1
-            foreach (var ingredient in ingredients) itemset.Add(new[] { ingredient });
+            var newPizzas = new List<Pizza>(pizzas);
+            while (newPizzas.Any())
+            {
+                newPizzas = FindNewPizzas(ingredients, newPizzas).ToList();
+                pizzas.AddRange(newPizzas);
+            }
 
-            // k > 1
-            var k2 = Generate(ingredients, itemset);
-            foreach (var v in k2) itemset.Add(v);
-            // itemset.Add(new[] { "a", "b", "c" });
-
-            return itemset.ToArray();
+            return pizzas.Distinct();
         }
 
-        private static IEnumerable<string[]> Generate(string[] input, IEnumerable<string[]> lattice)
+        private static IEnumerable<Pizza> FindNewPizzas(string[] ingredients, List<Pizza> previousPizzas)
         {
-            var permutations =
-                from a in lattice
-                from b in input
-                select a.Concat(new[] { b }).ToArray();
-
-            return permutations;
-
-
-            var itemset = new List<string[]>();
-            for (var i = 0; i < input.Length; i++)
-            for (var j = i + 1; j < input.Length; j++)
-                itemset.Add(new[] { input[i], input[j] });
-
-            return itemset;
-            // TODO genereer voor k + 1
-            // return itemset.Concat(Generate(input, itemset));
+            foreach (var pizza in previousPizzas)
+            foreach (var ingredient in ingredients)
+            {
+                if (pizza.HasIngredient(ingredient)) continue;
+                yield return pizza.AddIngredient(ingredient);
+            }
         }
-
-      
     }
 }
