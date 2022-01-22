@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace OnePizza
@@ -41,14 +40,6 @@ namespace OnePizza
             // return itemset.Concat(Generate(input, itemset));
         }
 
-        public class Pizza
-        {
-            public Pizza(params string[] ingredients)
-            {
-                Ingredients = ingredients.OrderBy(x => x).ToArray();
-            }
-
-            public string[] Ingredients { get; }
-        }
+      
     }
 }
