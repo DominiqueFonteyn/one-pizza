@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace OnePizza
@@ -10,31 +11,27 @@ namespace OnePizza
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
-            string[] input =
-            {
-                "3",
-                "2 cheese peppers",
-                "0",
-                "1 basil",
-                "1 pineapple",
-                "2 mushrooms tomatoes",
-                "1 basil"
-            };
+            // TODO prune possible pizzas
+            
+            var input = File.ReadLines(args[0]).ToArray();
 
             var clients = InputParser.Parse(input).ToArray();
-
             var ingredients = clients.SelectMany(x => x.Likes.Union(x.Dislikes)).Distinct().OrderBy(x => x).ToArray();
+            Console.WriteLine($"Found {clients.Length} clients");
+            Console.WriteLine($"Found {ingredients.Length} ingredients");
+            Console.WriteLine($"There are {Math.Pow(2, ingredients.Length) - 1} possible pizzas!");
+
 
             var pizzas = PizzaGenerator.GeneratePizzas(ingredients);
 
-            PrintPizzas(pizzas);
-
+            // PrintPizzas(pizzas);
             var scores = EvaluatePizzas(pizzas, clients);
-            PrintScores(scores);
+            var maxScore = scores.Values.Max(x => x);
+            PrintScores(scores
+                .Where(x => x.Value == maxScore)
+                .OrderByDescending(x => x.Value)
+                .ToArray());
 
-            Console.WriteLine("Bye!");
         }
 
         private static Dictionary<Pizza, int> EvaluatePizzas(IEnumerable<Pizza> pizzas, IEnumerable<Client> clients)
@@ -44,10 +41,11 @@ namespace OnePizza
                 x => Evaluator.EvaluatePizza(x, clients));
         }
 
-        private static void PrintScores(Dictionary<Pizza, int> scores)
+        private static void PrintScores(KeyValuePair<Pizza, int>[] scores)
         {
+            Console.WriteLine($"Found {scores.Length} pizza(s):");
             foreach (var (pizza, score) in scores)
-                Console.WriteLine($"{pizza} scores {score} points.");
+                Console.WriteLine($" - {pizza} scores {score} points.");
         }
 
         private static void PrintPizzas(Pizza[] pizzas)
