@@ -54,5 +54,10 @@ namespace OnePizza
         {
             return new Pizza(Ingredients.Union(new[] { ingredient }).ToArray());
         }
+
+        public override string ToString()
+        {
+            return "Pizza with " + string.Join(", ", Ingredients);
+        }
     }
 }

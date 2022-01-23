@@ -24,7 +24,7 @@ namespace OnePizza.Tests
         private static IClient CreateClient(bool likesPizza)
         {
             var client = Substitute.For<IClient>();
-            client.LikesPizza(Arg.Any<string[]>()).Returns(likesPizza);
+            client.LikesPizza(Arg.Any<Pizza>()).Returns(likesPizza);
             return client;
         }
     }

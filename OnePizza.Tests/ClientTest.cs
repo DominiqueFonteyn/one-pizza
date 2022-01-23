@@ -34,7 +34,7 @@ namespace OnePizza.Tests
         {
             var pizzaIngredients = new[] { "cheese", "mushrooms", "tomatoes", "peppers" };
 
-            Assert.Equal(expected, new Client(likes, dislikes).LikesPizza(pizzaIngredients));
+            Assert.Equal(expected, new Client(likes, dislikes).LikesPizza(new Pizza(pizzaIngredients)));
         }
     }
 }

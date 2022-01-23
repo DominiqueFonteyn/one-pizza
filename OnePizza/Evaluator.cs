@@ -7,7 +7,7 @@ namespace OnePizza
     {
         public static int EvaluatePizza(Pizza pizza, IEnumerable<IClient> clients)
         {
-            return clients.Count(x => x.LikesPizza(pizza.Ingredients));
+            return clients.Count(x => x.LikesPizza(pizza));
         }
     }
 }

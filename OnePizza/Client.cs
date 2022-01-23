@@ -6,7 +6,7 @@ namespace OnePizza
     {
         string[] Likes { get; }
         string[] Dislikes { get; }
-        bool LikesPizza(string[] ingredients);
+        bool LikesPizza(Pizza pizza);
     }
 
     public class Client : IClient
@@ -20,9 +20,10 @@ namespace OnePizza
         public string[] Likes { get; }
         public string[] Dislikes { get; }
 
-        public bool LikesPizza(string[] ingredients)
+        public bool LikesPizza(Pizza pizza)
         {
-            return LikesAllIngredients(ingredients) && HasNoDislikedIngredients(ingredients);
+            return LikesAllIngredients(pizza.Ingredients) && 
+                   HasNoDislikedIngredients(pizza.Ingredients);
         }
 
         private bool HasNoDislikedIngredients(string[] ingredients)
