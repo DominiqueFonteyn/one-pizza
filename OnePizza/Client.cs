@@ -2,7 +2,14 @@
 
 namespace OnePizza
 {
-    public class Client
+    public interface IClient
+    {
+        string[] Likes { get; }
+        string[] Dislikes { get; }
+        bool LikesPizza(string[] ingredients);
+    }
+
+    public class Client : IClient
     {
         public Client(string[] likes, string[] dislikes)
         {
