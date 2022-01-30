@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Timers;
 
 namespace OnePizza
 {
+    /*
+     Approach 1:
+     - generate all possible pizzas (like frequent itemset generation in the Apriori algorithm)
+     - evaluate pizzas for each client
+     - pizzas with the highest score wins     
+     
+     Approach 2:
+     - construct complete graph with all ingredients (each ingredient is a node, all nodes are interconnected)
+     - find the path that satisfies the most clients
+     
+     Approach 3:
+     - continuing on approach 2 - is a complete graph required?
+     - what if we only connect 2 nodes when a client likes them both?
+     
+     */
     internal class Program
     {
         public static string[] c_coarse = new[]
