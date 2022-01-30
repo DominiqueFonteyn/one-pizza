@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "oDUJA++QuX28J/5mYyLEC9+ByOx16DvIqE16W2TFh9Gm7Kou/qF/YLQ0sQqRpB6MYGvJk2mjB/gDo85FZlQucQ==",
+  "dgSpecHash": "n/0kddLkcHk+9aLfJWIFxwgOGgveZzhp383NbfhLA/d7HH3TrcOTpLC444mgf8Scqs7jnD71gNz+LZm/Q1yB/g==",
   "success": true,
   "projectFilePath": "D:\\Repositories\\personal-code-katas\\OnePizza\\OnePizza\\OnePizza.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\dominique.fonteyn\\.nuget\\packages\\combinatorics\\2.0.0\\combinatorics.2.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

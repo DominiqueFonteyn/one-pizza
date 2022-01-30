@@ -1,37 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Timers;
 
 namespace OnePizza
 {
     internal class Program
     {
-        // https://codingcompetitions.withgoogle.com/hashcode/round/00000000008f5ca9/00000000008f6f33
+        public static string[] c_coarse = new[]
+        {
+            "10",
+            "3 akuof byyii dlust",
+            "1 xdozp",
+            "3 dlust luncl qzfyo",
+            "1 xdozp",
+            "3 akuof luncl vxglq",
+            "1 qzfyo",
+            "3 dlust vxglq luncl",
+            "0",
+            "3 dlust xveqd tfeej",
+            "0",
+            "3 qzfyo vxglq luncl",
+            "1 byyii",
+            "3 luncl xdozp xveqd",
+            "1 sunhp",
+            "3 byyii xdozp tfeej",
+            "1 qzfyo",
+            "3 dlust akuof tfeej",
+            "1 xveqd",
+            "3 vxglq dlust byyii",
+            "1 akuof"
+        };
 
+        // https://codingcompetitions.withgoogle.com/hashcode/round/00000000008f5ca9/00000000008f6f33
         private static void Main(string[] args)
         {
             // TODO prune possible pizzas
-            
-            var input = File.ReadLines(args[0]).ToArray();
+            var input = args.Any() ? File.ReadLines(args[0]).ToArray() : c_coarse;
 
             var clients = InputParser.Parse(input).ToArray();
             var ingredients = clients.SelectMany(x => x.Likes.Union(x.Dislikes)).Distinct().OrderBy(x => x).ToArray();
-            Console.WriteLine($"Found {clients.Length} clients");
-            Console.WriteLine($"Found {ingredients.Length} ingredients");
-            Console.WriteLine($"There are {Math.Pow(2, ingredients.Length) - 1} possible pizzas!");
+            Logger.Write($"Found {clients.Length} clients");
+            Logger.Write($"Found {ingredients.Length} ingredients");
+            Logger.Write($"There are {Math.Pow(2, ingredients.Length) - 1} possible pizzas!");
 
+            var stopwatch = Stopwatch.StartNew();
+            var pizzas = PizzaGenerator.GeneratePizzas(clients, ingredients);
+            stopwatch.Stop();
+            Logger.Write($"Generated {pizzas.LongLength} in {stopwatch.ElapsedMilliseconds}ms");
 
-            var pizzas = PizzaGenerator.GeneratePizzas(ingredients);
-
-            // PrintPizzas(pizzas);
+            // PrintPizzas(pizzas);    
             var scores = EvaluatePizzas(pizzas, clients);
             var maxScore = scores.Values.Max(x => x);
             PrintScores(scores
                 .Where(x => x.Value == maxScore)
                 .OrderByDescending(x => x.Value)
                 .ToArray());
-
         }
 
         private static Dictionary<Pizza, int> EvaluatePizzas(IEnumerable<Pizza> pizzas, IEnumerable<Client> clients)
@@ -43,15 +69,15 @@ namespace OnePizza
 
         private static void PrintScores(KeyValuePair<Pizza, int>[] scores)
         {
-            Console.WriteLine($"Found {scores.Length} pizza(s):");
+            Logger.Write($"Found {scores.Length} pizza(s):");
             foreach (var (pizza, score) in scores)
-                Console.WriteLine($" - {pizza} scores {score} points.");
+                Logger.Write($" - {pizza} scores {score} points.");
         }
 
         private static void PrintPizzas(Pizza[] pizzas)
         {
-            Console.WriteLine($"Found {pizzas.Length} possible pizzas!");
-            foreach (var pizza in pizzas) Console.WriteLine(" - " + pizza);
+            Logger.Write($"Found {pizzas.Length} possible pizzas!");
+            foreach (var pizza in pizzas) Logger.Write(" - " + pizza);
         }
     }
 }
